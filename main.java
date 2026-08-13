@@ -24,7 +24,7 @@ class BinarySearchTree {
     private TreeNode root;
 
     public BinarySearchTree() {
-        this.root = root;
+        this.root = null;
     }
 
     /**
@@ -73,6 +73,7 @@ class BinarySearchTree {
     private TreeNode deleteRecursive(TreeNode current, int value) {
         if (current == null) {
             System.out.println("No " + value + " value in the Tree!");
+            return null;
         }
         if (value < current.value) {
             current.left = deleteRecursive(current.left, value);
@@ -102,6 +103,23 @@ class BinarySearchTree {
     }
 
     /**
+     * InOrder steps
+     */
+    public void printInOrder() {
+        System.out.print("InOrder steps:");
+        inOrderRecursive(root);
+        System.out.println();
+    }
+
+    private void inOrderRecursive(TreeNode node) {
+        if (node != null) {
+            inOrderRecursive(node.left);
+            System.out.print(node.value + " ");
+            inOrderRecursive(node.right);
+        }
+    }
+
+    /**
      * PreOrder steps
      */
     public void printPreOrder() {
@@ -112,7 +130,7 @@ class BinarySearchTree {
 
     private void preOrderRecursive(TreeNode node) {
         if (node != null) {
-            System.out.println(node.value + " ");
+            System.out.print(node.value + " ");
             preOrderRecursive(node.left);
             preOrderRecursive(node.right);
         }
@@ -131,7 +149,87 @@ class BinarySearchTree {
         if (node != null) {
             postOrderRecursive(node.left);
             postOrderRecursive(node.right);
-            System.out.println(node.value + " ");
+            System.out.print(node.value + " ");
         }
+    }
+}
+
+/**
+ * Main class for menu
+ */
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        BinarySearchTree bst = new BinarySearchTree();
+        boolean running = true;
+
+        while (running) {
+            printMenu();
+            System.out.print("Please choose (1-7): ");
+
+            if (!scanner.hasNextInt()) {
+                System.out.println("Please choose a number (1-7).\n");
+                scanner.next();
+                continue;
+            }
+
+            int choice = scanner.nextInt();
+
+            switch (choice) {
+                case 1:
+                    bst.createDefaultTree();
+                    break;
+                case 2:
+                    System.out.print("Please give the next node value: ");
+                    if (scanner.hasNextInt()) {
+                        int valToAdd = scanner.nextInt();
+                        bst.insert(valToAdd);
+                        System.out.println(valToAdd + " value added.");
+                    } else {
+                        System.out.println("Invalid number!");
+                        scanner.next();
+                    }
+                    break;
+                case 3:
+                    System.out.print("Please give the node value for deletion: ");
+                    if (scanner.hasNextInt()) {
+                        int valToDelete = scanner.nextInt();
+                        bst.delete(valToDelete);
+                        System.out.println(valToDelete + " value deleted.");
+                    } else {
+                        System.out.println("Invalid number!");
+                        scanner.next();
+                    }
+                    break;
+                case 4:
+                    bst.printInOrder();
+                    break;
+                case 5:
+                    bst.printPreOrder();
+                    break;
+                case 6:
+                    bst.printPostOrder();
+                    break;
+                case 7:
+                    System.out.println("The script stops.");
+                    running = false;
+                    break;
+                default:
+                    System.out.println("Please choose a number (1-7)!");
+            }
+            System.out.println();
+        }
+        scanner.close();
+    }
+
+    private static void printMenu() {
+        System.out.println("BINARY SEARCH TREE");
+        System.out.println("1 - Create a binary search tree");
+        System.out.println("2 - Add a node");
+        System.out.println("3 - Delete a node");
+        System.out.println("4 - Print nodes by InOrder");
+        System.out.println("5 - Print nodes by PreOrder");
+        System.out.println("6 - Print nodes by PostOrder");
+        System.out.println("7 - Exit program");
     }
 }
