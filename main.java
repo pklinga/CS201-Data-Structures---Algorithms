@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 /**
- * The binary Search Tree node class
+ * The Binary Search Tree node class
  */
 
 class TreeNode {
@@ -14,4 +14,17 @@ class TreeNode {
         this.left = null;
         this.right = null;
     }
+}
+
+/**
+ * A Binary Search Tree class with the operations
+ */
+
+class BinarySearchTree {
+    private TreeNode root;
+
+    public BinarySearchTree() {
+        this.root = root;
+    }
+
 }
