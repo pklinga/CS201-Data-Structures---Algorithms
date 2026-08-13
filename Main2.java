@@ -29,6 +29,45 @@ class BoyerMoore {
         return badChar;
     }
 
+    /**
+     * Search all of the pattern
+     * 
+     * @param text
+     * @param pattern
+     * @return A list
+     */
+    public static List<Integer> search(String text, String pattern) {
+        List<Integer> matches = new ArrayList<>();
+        int n = text.length();
+        int m = pattern.length();
+
+        if (m == 0 || m > n) {
+            return matches;
+        }
+
+        int[] badChar = badCharHeuristic(pattern);
+        int s = 0; // shift of the pattern
+
+        while (s <= (n - m)) {
+            int j = m - 1;
+
+            // Reduce j
+            while (j >= 0 && pattern.charAt(j) == text.charAt(s + j)) {
+                j--;
+            }
+
+            // If pattern is present
+            if (j < 0) {
+                matches.add(s);
+                // Shift pattern
+                s += (s + m < n) ? m - badChar[text.charAt(s + m)] : 1;
+            } else {
+                s += Math.max(1, j - badChar[text.charAt(s + j)]);
+            }
+        }
+        return matches;
+    }
+
 }
 
 public class Main2 {
