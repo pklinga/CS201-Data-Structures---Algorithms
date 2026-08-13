@@ -27,4 +27,23 @@ class BinarySearchTree {
         this.root = root;
     }
 
+    /**
+     * Create the default balanced tree from elements.
+     */
+    public void createDefaultTree() {
+        this.root = null; // Delete any tree created earlier
+        int[] initialValues = { 4, 2, 6, 1, 3, 5, 7 };
+        for (int val : initialValues) {
+            insert(val);
+        }
+        System.out.println("Binary Search Tree created successfully");
+    }
+
+    /**
+     * Insert new node
+     */
+    public void insert(int value) {
+        root = insertRecursive(root, value);
+    }
+
 }
