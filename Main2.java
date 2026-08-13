@@ -70,6 +70,73 @@ class BoyerMoore {
 
 }
 
+/**
+ * Main2 - menu interface
+ */
 public class Main2 {
+    // String with all 50 states
+    private static final String STATES_TEXT = "Alabama, Alaska, Arizona, Arkansas, California, " +
+            "Colorado, Connecticut, Delaware, Florida, Georgia, Hawaii, Idaho, Illinois, Indiana, " +
+            "Iowa, Kansas, Kentucky, Louisiana, Maine, Maryland, Massachusetts, Michigan, " +
+            "Minnesota, Mississippi, Missouri, Montana, Nebraska, Nevada, New Hampshire, " +
+            "New Jersey, New Mexico, New York, North Carolina, North Dakota, Ohio, Oklahoma, " +
+            "Oregon, Pennsylvania, Rhode Island, South Carolina, South Dakota, Tennessee, " +
+            "Texas, Utah, Vermont, Virginia, Washington, West Virginia, Wisconsin, Wyoming.";
 
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        boolean running = true;
+
+        while (running) {
+            printMenu();
+            System.out.print("Please choose an option (1-3): ");
+
+            if (!scanner.hasNextInt()) {
+                System.out.println("Invalid input. Please enter a number (1-3).\n");
+                scanner.next();
+                continue;
+            }
+
+            int choice = scanner.nextInt();
+            scanner.nextLine();
+
+            switch (choice) {
+                case 1:
+                    System.out.println("\n50 US States");
+                    System.out.println(STATES_TEXT);
+                    break;
+
+                case 2:
+                    System.out.print("Enter a pattern for searching: ");
+                    String pattern = scanner.nextLine();
+
+                    // Call the Boyer-Moore algorythm
+                    List<Integer> indices = BoyerMoore.search(STATES_TEXT, pattern);
+
+                    if (indices.isEmpty()) {
+                        System.out.println("Pattern " + pattern + " not found.\n");
+                    } else {
+                        System.out.println("Pattern " + pattern + " found at index: " + indices + "\n");
+                    }
+                    break;
+                case 3:
+                    System.out.println("Script stops.");
+                    running = false;
+                    break;
+                default:
+                    System.out.println("Invalid choice. Please select numbers (1-3).\n");
+            }
+        }
+        scanner.close();
+    }
+
+    /**
+     * Print menu
+     */
+    private static void printMenu() {
+        System.out.println("STRING SEARCH MENU");
+        System.out.println("1 - Display the text");
+        System.out.println("2 - Search");
+        System.out.println("3 - Exit program");
+    }
 }
