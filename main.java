@@ -55,9 +55,50 @@ class BinarySearchTree {
         } else if (value > current.value) {
             current.right = insertRecursive(current.right, value);
         } else {
-            System.out.println("The " + value + "already exists!");
+            System.out.println("The " + value + " already exists!");
         }
         return current;
+    }
+
+    /**
+     * Delete a node from the tree
+     */
+    public void delete(int value) {
+        if (root == null) {
+            System.out.println("The tree is empty");
+        }
+        root = deleteRecursive(root, value);
+    }
+
+    private TreeNode deleteRecursive(TreeNode current, int value) {
+        if (current == null) {
+            System.out.println("No " + value + " value in the Tree!");
+        }
+        if (value < current.value) {
+            current.left = deleteRecursive(current.left, value);
+        } else if (value > current.value) {
+            current.right = deleteRecursive(current.right, value);
+        } else {
+            // if 0 or 1 child
+            if (current.left == null)
+                return current.right;
+            if (current.right == null)
+                return current.left;
+
+            // 2 children
+            current.value = findMinValue(current.right);
+            current.right = deleteRecursive(current.right, current.value);
+        }
+        return current;
+    }
+
+    private int findMinValue(TreeNode node) {
+        int minValue = node.value;
+        while (node.left != null) {
+            minValue = node.left.value;
+            node = node.left;
+        }
+        return minValue;
     }
 
 }
