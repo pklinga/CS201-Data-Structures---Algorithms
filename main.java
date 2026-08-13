@@ -106,7 +106,7 @@ class BinarySearchTree {
      * InOrder steps
      */
     public void printInOrder() {
-        System.out.print("InOrder steps:");
+        System.out.print("InOrder steps: ");
         inOrderRecursive(root);
         System.out.println();
     }
@@ -123,7 +123,7 @@ class BinarySearchTree {
      * PreOrder steps
      */
     public void printPreOrder() {
-        System.out.println("PreOrder steps: ");
+        System.out.print("PreOrder steps: ");
         preOrderRecursive(root);
         System.out.println();
     }
@@ -140,7 +140,7 @@ class BinarySearchTree {
      * PostOrder steps
      */
     public void printPostOrder() {
-        System.out.println("PostOrder steps: ");
+        System.out.print("PostOrder steps: ");
         postOrderRecursive(root);
         System.out.println();
     }
@@ -195,7 +195,6 @@ public class Main {
                     if (scanner.hasNextInt()) {
                         int valToDelete = scanner.nextInt();
                         bst.delete(valToDelete);
-                        System.out.println(valToDelete + " value deleted.");
                     } else {
                         System.out.println("Invalid number!");
                         scanner.next();
