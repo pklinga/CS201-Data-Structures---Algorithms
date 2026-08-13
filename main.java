@@ -101,4 +101,37 @@ class BinarySearchTree {
         return minValue;
     }
 
+    /**
+     * PreOrder steps
+     */
+    public void printPreOrder() {
+        System.out.println("PreOrder steps: ");
+        preOrderRecursive(root);
+        System.out.println();
+    }
+
+    private void preOrderRecursive(TreeNode node) {
+        if (node != null) {
+            System.out.println(node.value + " ");
+            preOrderRecursive(node.left);
+            preOrderRecursive(node.right);
+        }
+    }
+
+    /**
+     * PostOrder steps
+     */
+    public void printPostOrder() {
+        System.out.println("PostOrder steps: ");
+        postOrderRecursive(root);
+        System.out.println();
+    }
+
+    private void postOrderRecursive(TreeNode node) {
+        if (node != null) {
+            postOrderRecursive(node.left);
+            postOrderRecursive(node.right);
+            System.out.println(node.value + " ");
+        }
+    }
 }
